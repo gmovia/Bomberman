@@ -1,11 +1,12 @@
 pub enum Element {
     Bomb(char, usize),
     Rock,
+    Wall,
     Empty,
 }
 
 impl Element {
-    pub fn new_bomb(code: char, scope: usize) -> Self {
+    pub fn new_bomb(scope: usize) -> Self {
         Element::Bomb('B', scope)
     }
 
@@ -17,10 +18,15 @@ impl Element {
         Element::Rock
     }
 
+    pub fn new_wall() -> Self{
+        Element::Wall
+    }
+
     pub fn typef(&self) -> char {
         match self {
             Element::Bomb(code, _) => *code,
             Element::Rock => 'R',
+            Element::Wall => 'W',
             Element::Empty => '_',
         }
     }
@@ -29,6 +35,7 @@ impl Element {
         match self {
             Element::Bomb(code, scope) => format!("{}{}", *code, *scope),
             Element::Rock => 'R'.to_string(),
+            Element::Wall => 'W'.to_string(),
             Element::Empty => "_".to_string(),
         }
     }

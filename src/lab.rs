@@ -65,6 +65,10 @@ impl Maze {
         if let Element::Rock = &self.maze[x][y] {
             return false;
         }
+
+        if let Element::Wall = &self.maze[x][y] {
+            return false;
+        }
         return true;        
     }
 }

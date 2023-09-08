@@ -177,4 +177,24 @@ mod tests {
             resolve(maze.detonate(2, 0))
         );
     }
+
+    // BOMB, WALL, ROCK AND NOTHING
+
+    #[test]
+    fn test_22_result_lab() {
+        let mut maze: Maze = Maze::new("_ B1 _\nB2 R _\n_ B3 W");
+        assert_eq!(
+            "_ B1 _\nB2 R _\n_ _ W".to_string(),
+            resolve(maze.detonate(2, 1))
+        );
+    }
+
+    #[test]
+    fn test_23_result_lab() {
+        let mut maze: Maze = Maze::new("_ B1 _\nB2 W _\nB4 B3 R");
+        assert_eq!(
+            "_ B1 _\n_ W _\n_ _ R".to_string(),
+            resolve(maze.detonate(2, 0))
+        );
+    }
 }

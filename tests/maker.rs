@@ -23,4 +23,10 @@ mod tests {
         let element: Element = Maker::make("R");
         assert_eq!('R', element.typef());
     }
+
+    #[test]
+    fn test_04_create_wall() {
+        let element: Element = Maker::make("W");
+        assert_eq!('W', element.typef());
+    }
 }
