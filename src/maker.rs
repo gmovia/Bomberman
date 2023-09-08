@@ -1,34 +1,4 @@
-use std::io::Empty;
-
-pub enum Element {
-    Bomb(char, usize),
-    Empty,
-}
-
-impl Element {
-    pub fn new_bomb(code: char, scope: usize) -> Self {
-        Element::Bomb('B', scope)
-    }
-
-    pub fn new_empty() -> Self {
-        Element::Empty
-    }
-
-    pub fn typef(&self) -> char {
-        match self {
-            Element::Bomb(code, _) => *code,
-            Element::Empty => '_',
-        }
-    }
-
-    pub fn code(&self) -> String {
-        match self {
-            Element::Bomb(code, scope) => format!("{}{}", *code, *scope),
-            Element::Empty => "_".to_string(),
-        }
-    }
-}
-
+use crate::element::Element;
 pub struct Maker;
 impl Maker {
     pub fn make(code: &str) -> Element {
@@ -41,6 +11,7 @@ impl Maker {
                 }
             } else {
                 match first_char {
+                    'R' => Element::Rock,
                     _ => Element::Empty,
                 }
             }

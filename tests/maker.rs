@@ -1,14 +1,13 @@
+use taller1_tp1_bomberman::element::Element;
 #[cfg(test)]
 use taller1_tp1_bomberman::maker::Maker;
-use taller1_tp1_bomberman::maker::Element;
 
 mod tests {
-    
 
     use super::*;
 
     #[test]
-    fn test_01_create_rock() {
+    fn test_01_create_empty() {
         let element: Element = Maker::make("_");
         assert_eq!('_', element.typef());
     }
@@ -18,4 +17,10 @@ mod tests {
         let element: Element = Maker::make("B2");
         assert_eq!('B', element.typef());
     }
-}   
+
+    #[test]
+    fn test_03_create_rock() {
+        let element: Element = Maker::make("R");
+        assert_eq!('R', element.typef());
+    }
+}
