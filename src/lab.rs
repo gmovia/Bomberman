@@ -76,9 +76,13 @@ impl Maze {
     }
 
     pub fn apply(&mut self, x: usize, y: usize) -> bool {
-        match &self.maze[x][y] {
+        match self.maze[x][y] {
             Element::Bomb(_, scope) => {
-                self.detonate_bomb(*scope, x, y);
+                self.detonate_bomb(scope, x, y);
+                true
+            },
+            Element::Player(_, ref mut lifes) => {
+                *lifes -= 1;
                 true
             }
             Element::Rock | Element::Wall => false,
@@ -87,4 +91,3 @@ impl Maze {
     }
     
 }
-

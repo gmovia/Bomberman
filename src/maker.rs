@@ -7,7 +7,9 @@ impl Maker {
         if let Some(first_char) = code_chars.next() {
             if let Some(second_char) = code_chars.next() {
                 match (first_char, second_char) {
-                    (_, _) => Element::new_bomb(second_char as usize - 48),
+                    ('B', _) => Element::new_bomb(second_char as usize - 48),
+                    ('F', _) => Element::new_player(second_char as usize - 48),
+                    (_, _) => Element::new_empty(),
                 }
             } else {
                 match first_char {

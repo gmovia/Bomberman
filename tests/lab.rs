@@ -189,12 +189,50 @@ mod tests {
         );
     }
 
+    // BOMB, WALL, ROCK, PLAYER AND NOTHING
+
     #[test]
     fn test_23_result_lab() {
-        let mut maze: Maze = Maze::new("_ B1 _\nB2 W _\nB4 B3 R");
+        let mut maze: Maze = Maze::new("_ _ _\nB2 F1 _\n_ _ _");
         assert_eq!(
-            "_ B1 _\n_ W _\n_ _ R".to_string(),
-            resolve(maze.detonate(2, 0))
+            "_ _ _\n_ _ _\n_ _ _".to_string(),
+            resolve(maze.detonate(1, 0))
+        );
+    }
+
+    #[test]
+    fn test_24_result_lab() {
+        let mut maze: Maze = Maze::new("_ _ _\nB2 F3 _\n_ _ _");
+        assert_eq!(
+            "_ _ _\n_ F2 _\n_ _ _".to_string(),
+            resolve(maze.detonate(1, 0))
+        );
+    }
+
+    #[test]
+    fn test_25_result_lab() {
+        let mut maze: Maze = Maze::new("_ B1 _\nB2 F3 B1\n_ _ _");
+        assert_eq!(
+            "_ B1 _\n_ F1 _\n_ _ _".to_string(),
+            resolve(maze.detonate(1, 0))
+        );
+    }
+
+    #[test]
+    fn test_26_result_lab() {
+        let mut maze: Maze = Maze::new("_ B1 _\nB2 R F1\n_ _ _");
+        assert_eq!(
+            "_ B1 _\n_ R F1\n_ _ _".to_string(),
+            resolve(maze.detonate(1, 0))
+        );
+    }
+
+    #[test]
+    fn test_27_result_lab() {
+        let mut maze: Maze = Maze::new("_ B1 _\nB2 W F1\n_ _ _");
+        assert_eq!(
+            "_ B1 _\n_ W F1\n_ _ _".to_string(),
+            resolve(maze.detonate(1, 0))
         );
     }
 }

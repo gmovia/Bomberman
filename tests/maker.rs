@@ -29,4 +29,10 @@ mod tests {
         let element: Element = Maker::make("W");
         assert_eq!('W', element.typef());
     }
+
+    #[test]
+    fn test_05_create_player() {
+        let element: Element = Maker::make("F2");
+        assert_eq!('F', element.typef());
+    }
 }
