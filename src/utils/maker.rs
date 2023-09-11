@@ -10,6 +10,7 @@ impl Maker {
                 match (first_char, second_char) {
                     ('B', _) => Element::new_bomb(second_char as usize - 48, position),
                     ('F', _) => Element::new_player(second_char as usize - 48, position),
+                    ('D', _) => Element::new_detour(second_char, position),
                     (_, _) => Element::new_empty(position),
                 }
             } else {

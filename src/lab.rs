@@ -37,26 +37,26 @@ impl Maze {
 
     pub fn detonate_bomb(&mut self, bomb: Bomb) {
         let (x, y, scope) = (bomb.position.x, bomb.position.y, bomb.scope);
-        self.maze[x][bomb.position.y] = Element::Empty(Position::new(bomb.position.x, bomb.position.y));
-        self.expand(x, y, scope, Direction::Right, false);
-        self.expand(x, y, scope, Direction::Down, false);
-        self.expand(x, y, scope, Direction::Up, true);
-        self.expand(x, y, scope, Direction::Left, true);
+        self.maze[x][y] = Element::Empty(Position::new(bomb.position.x, bomb.position.y));
+        self.expand(x, y, scope, Direction::Right);
+        self.expand(x, y, scope, Direction::Down);
+        self.expand(x, y, scope, Direction::Up);
+        self.expand(x, y, scope, Direction::Left);
     }
 
     
-    fn expand(&mut self, x: usize, y: usize, scope: usize, direction: Direction, reverse: bool){
-        let (start, end, a, b, c, d) = match direction {
-            Direction::Up => (if scope > x { 0 } else { x - scope }, x, 0, 1, 1, 0),
-            Direction::Down => (x, x + scope, 0, 1, 1, 0),
-            Direction::Left => (if scope > y { 0 } else { y - scope }, y, 1, 0, 0, 1),
-            Direction::Right => (y, y + scope, 1, 0, 0, 1),
+    pub fn expand(&mut self, x: usize, y: usize, scope: usize, direction: Direction){
+        let (start, end, a, b, c, d, reverse) = match direction {
+            Direction::Up => (if scope > x { 0 } else { x - scope }, x, 0, 1, 1, 0, true),
+            Direction::Down => (x, x + scope, 0, 1, 1, 0, false),
+            Direction::Left => (if scope > y { 0 } else { y - scope }, y, 1, 0, 0, 1, true),
+            Direction::Right => (y, y + scope, 1, 0, 0, 1, false),
         };
-        
-        if reverse == true{
+
+        if reverse{
             for index in (start..=end).rev(){
                 if self.is_in_maze(x*a + index*c, y*b + index*d){
-                    if !self.apply(x*a + index*c, y*b + index*d){
+                    if !self.applys(x*a + index*c, y*b + index*d, if end - index <= 0 {0} else {end - index - 1}){
                         break;
                     }
                 }
@@ -65,7 +65,7 @@ impl Maze {
         else{
             for index in start..=end{
                 if self.is_in_maze(x*a + index*c, y*b + index*d){
-                    if !self.apply(x*a + index*c, y*b + index*d){
+                    if !self.applys(x*a + index*c, y*b + index*d, if end - index <= 0 {0} else {end - index - 1}){
                         break;
                     }
                 }
@@ -73,8 +73,8 @@ impl Maze {
         }
     }
     
-    pub fn apply(&mut self, x: usize, y: usize) -> bool{
+    pub fn applys(&mut self, x: usize, y: usize, current_scope: usize) -> bool{
         let mut element = self.maze[x][y].clone();
-        element.apply(self, x, y)
+        element.apply(self, current_scope)
     }    
 }

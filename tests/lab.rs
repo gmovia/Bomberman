@@ -235,4 +235,108 @@ mod tests {
             resolve(maze.detonate(1, 0))
         );
     }
+
+    // BOMB, WALL, ROCK, PLAYER, DETOUR AND NOTHING
+
+    #[test]
+    fn test_28_result_lab() {
+        let mut maze: Maze = Maze::new("_ B2 _\n_ DR F1\n_ _ _");
+        assert_eq!(
+            "_ _ _\n_ DR _\n_ _ _".to_string(),
+            resolve(maze.detonate(0, 1))
+        );
+    }
+    
+    #[test]
+    fn test_29_result_lab() {
+        let mut maze: Maze = Maze::new("_ B2 _\n_ DR F1\n_ B1 _");
+        assert_eq!(
+            "_ _ _\n_ DR _\n_ B1 _".to_string(),
+            resolve(maze.detonate(0, 1))
+        );
+    }
+
+    #[test]
+    fn test_30_result_lab() {
+        let mut maze: Maze = Maze::new("_ _ _\n_ F1 _\nB2 DU _");
+        assert_eq!(
+            "_ _ _\n_ _ _\n_ DU _".to_string(),
+            resolve(maze.detonate(2, 0))
+        );
+    }
+
+    #[test]
+    fn test_31_result_lab() {
+        let mut maze: Maze = Maze::new("F1 DL _\n_ B2 _\n_ _ _");
+        assert_eq!(
+            "_ DL _\n_ _ _\n_ _ _".to_string(),
+            resolve(maze.detonate(1, 1))
+        );
+    }
+
+    #[test]
+    fn test_32_result_lab() {
+        let mut maze: Maze = Maze::new("_ _ _\nDD B2 _\nF1 _ _");
+        assert_eq!(
+            "_ _ _\nDD _ _\n_ _ _".to_string(),
+            resolve(maze.detonate(1, 1))
+        );
+    }
+
+    #[test]
+    fn test_33_result_lab() {
+        let mut maze: Maze = Maze::new("B3 _ DD\n_ _ F1\n_ _ _");
+        assert_eq!(
+            "_ _ DD\n_ _ _\n_ _ _".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
+
+    #[test]
+    fn test_34_result_lab() {
+        let mut maze: Maze = Maze::new("B3 _ DD\n_ _ _\n_ _ F1");
+        assert_eq!(
+            "_ _ DD\n_ _ _\n_ _ F1".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
+
+    #[test]
+    fn test_35_result_lab() {
+        let mut maze: Maze = Maze::new("B4 _ _ DD\n_ _ _ F1\n_ _ _ _\n_ _ _ _");
+        assert_eq!(
+            "_ _ _ DD\n_ _ _ _\n_ _ _ _\n_ _ _ _".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
+
+    #[test]
+    fn test_36_result_lab() {
+        let mut maze: Maze = Maze::new("B4 _ _ DD\n_ _ _ _\n_ _ _ F1\n_ _ _ _");
+        assert_eq!(
+            "_ _ _ DD\n_ _ _ _\n_ _ _ F1\n_ _ _ _".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
+    
+    #[test]
+    fn test_37_result_lab() {
+        let mut maze: Maze = Maze::new("_ _ _ _\nDD _ B4 _\nDR F2 _ _\nF2 _ _ _");
+        assert_eq!(
+            "_ _ _ _\nDD _ _ _\nDR F1 _ _\nF2 _ _ _".to_string(),
+            resolve(maze.detonate(1, 2))
+        );
+    }
+
+    // INTEGRAL TEST
+
+
+    #[test]
+    fn test_01_integral_result_lab() {
+        let mut maze: Maze = Maze::new("B2 R R _ F1 _ _\n_ W R W _ W _\nB5 _ _ _ B2 _ _\n_ W _ W _ W _\n_ _ _ _ _ _ _\n_ W _ W _ W _\n_ _ _ _ _ _ _");
+        assert_eq!(
+            "_ R R _ _ _ _\n_ W R W _ W _\n_ _ _ _ _ _ _\n_ W _ W _ W _\n_ _ _ _ _ _ _\n_ W _ W _ W _\n_ _ _ _ _ _ _".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
 }
