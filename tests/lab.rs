@@ -339,4 +339,13 @@ mod tests {
             resolve(maze.detonate(0, 0))
         );
     }
+
+    #[test]
+    fn test_02_integral_result_lab() {
+        let mut maze: Maze = Maze::new("_ _ B2 _ B1 _ _\n_ W _ W _ W _\n_ _ B2 R F1 _ _\n_ W _ W R W _\n_ _ B4 _ _ _ _\n_ W _ W _ W _\n_ _ _ _ _ _ B1");
+        assert_eq!(
+            "_ _ _ _ _ _ _\n_ W _ W _ W _\n_ _ _ R F1 _ _\n_ W _ W R W _\n_ _ _ _ _ _ _\n_ W _ W _ W _\n_ _ _ _ _ _ B1".to_string(),
+            resolve(maze.detonate(4, 2))
+        );
+    }
 }

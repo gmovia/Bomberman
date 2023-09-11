@@ -1,4 +1,3 @@
-use std::fmt::format;
 use crate::types::direction::Direction;
 use crate::element::bomb::Bomb;
 use crate::lab::Maze;
