@@ -1,5 +1,6 @@
-use crate::element::Element;
-use crate::maker::Maker;
+use crate::element::element::Element;
+use crate::utils::maker::Maker;
+use crate::types::position::Position;
 
 pub struct Converter;
 impl Converter {
@@ -15,10 +16,10 @@ impl Converter {
     pub fn string_to_matrix_object(maze: &str) -> Vec<Vec<Element>> {
         let mut new_matrix = Vec::new();
         let matrix = Self::string_to_matrix(maze);
-        for row in matrix {
+        for (index_row, row) in matrix.iter().enumerate() {
             let mut new_row_matrix = Vec::new();
-            for element in row {
-                new_row_matrix.push(Maker::make(element.as_str()));
+            for (index_column, element) in row.iter().enumerate() {
+                new_row_matrix.push(Maker::make(element.as_str(), Position::new(index_row, index_column)));
             }
             new_matrix.push(new_row_matrix);
         }

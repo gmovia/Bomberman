@@ -1,13 +1,10 @@
-use crate::{converter::Converter, element::Element};
-enum Direction {
-    Up,
-    Down,
-    Left,
-    Right,
-}
-
+use crate::element::element::Element;
+use crate::element::bomb::Bomb;
+use crate::types::position::Position;
+use crate::utils::converter::Converter;
+use crate::types::direction::Direction;
 pub struct Maze {
-    maze: Vec<Vec<Element>>,
+    pub maze: Vec<Vec<Element>>,
     limit_x: usize,
     limit_y: usize
 }
@@ -29,8 +26,8 @@ impl Maze {
     }
 
     pub fn detonate(&mut self, x: usize, y: usize) -> Result<String, String> {
-        if let Element::Bomb(_, scope) = &self.maze[x][y] {
-            self.detonate_bomb(*scope, x, y)
+        if let Element::Bomb(bomb) = &self.maze[x][y] {
+            self.detonate_bomb(bomb.clone())
         } else {
             return Err("ERR".to_string());
         }
@@ -38,8 +35,9 @@ impl Maze {
         Ok(Converter::matrix_object_to_string(&self.maze))
     }
 
-    pub fn detonate_bomb(&mut self, scope: usize, x: usize, y: usize) {
-        self.maze[x][y] = Element::Empty;
+    pub fn detonate_bomb(&mut self, bomb: Bomb) {
+        let (x, y, scope) = (bomb.position.x, bomb.position.y, bomb.scope);
+        self.maze[x][bomb.position.y] = Element::Empty(Position::new(bomb.position.x, bomb.position.y));
         self.expand(x, y, scope, Direction::Right, false);
         self.expand(x, y, scope, Direction::Down, false);
         self.expand(x, y, scope, Direction::Up, true);
@@ -74,20 +72,9 @@ impl Maze {
             }
         }
     }
-
-    pub fn apply(&mut self, x: usize, y: usize) -> bool {
-        match self.maze[x][y] {
-            Element::Bomb(_, scope) => {
-                self.detonate_bomb(scope, x, y);
-                true
-            },
-            Element::Player(_, ref mut lifes) => {
-                *lifes -= 1;
-                true
-            }
-            Element::Rock | Element::Wall => false,
-            _ => true,
-        }
-    }
     
+    pub fn apply(&mut self, x: usize, y: usize) -> bool{
+        let mut element = self.maze[x][y].clone();
+        element.apply(self, x, y)
+    }    
 }
