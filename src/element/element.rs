@@ -3,6 +3,7 @@ use crate::lab::Maze;
 use crate::types::direction::Direction;
 use crate::types::position::Position;
 use crate::utils::maker::Maker;
+use crate::element::blast::Blast;
 #[derive(Debug, Clone)]
 
 pub enum Element {
@@ -46,7 +47,7 @@ impl Element {
     pub fn apply(&mut self, maze: &mut Maze, current_scope: usize) -> bool {
         match self {
             Element::Bomb(bomb) => {
-                maze.detonate_bomb(bomb.clone());
+                bomb.detonate(maze);
                 true
             }
             Element::Player(lifes, position) => {
@@ -57,10 +58,10 @@ impl Element {
             }
             Element::Detour(direction, position) => {
                 match *direction {
-                    'R' => maze.expand(position.x + 1, position.y, current_scope, Direction::Right),
-                    'L' => maze.expand(position.x - 1, position.y, current_scope, Direction::Left),
-                    'U' => maze.expand(position.x, position.y - 1, current_scope, Direction::Up),
-                    'D' => maze.expand(position.x, position.y + 1, current_scope, Direction::Down),
+                    'R' => Blast::expand(position.x + 1, position.y, current_scope, Direction::Right, maze),
+                    'L' => Blast::expand(position.x - 1, position.y, current_scope, Direction::Left, maze),
+                    'U' => Blast::expand(position.x, position.y - 1, current_scope, Direction::Up, maze),
+                    'D' => Blast::expand(position.x, position.y + 1, current_scope, Direction::Down, maze),
                     _ => (),
                 }
                 false
