@@ -88,7 +88,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ _ _\nB2 _ _\n_ _ _");
         assert_eq!(
             "_ _ _\n_ _ _\n_ _ _".to_string(),
-            resolve(maze.detonate(1, 0))
+            resolve(maze.detonate(0, 1))
         );
     }
 
@@ -97,7 +97,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ B1 _\nB2 _ _\n_ _ _");
         assert_eq!(
             "_ B1 _\n_ _ _\n_ _ _".to_string(),
-            resolve(maze.detonate(1, 0))
+            resolve(maze.detonate(0, 1))
         );
     }
 
@@ -115,7 +115,7 @@ mod tests {
         let mut maze: Maze = Maze::new("B2 B1 _\n_ _ _\n_ _ _");
         assert_eq!(
             "_ _ _\n_ _ _\n_ _ _".to_string(),
-            resolve(maze.detonate(0, 1))
+            resolve(maze.detonate(1, 0))
         );
     }
 
@@ -148,7 +148,7 @@ mod tests {
     #[test]
     fn test_18_result_lab() {
         let mut maze: Maze = Maze::new("B4 _ R B1");
-        assert_eq!("B4 _ R _".to_string(), resolve(maze.detonate(0, 3)));
+        assert_eq!("B4 _ R _".to_string(), resolve(maze.detonate(3, 0)));
     }
 
     #[test]
@@ -165,7 +165,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ B1 _\nB2 R _\n_ B3 R");
         assert_eq!(
             "_ B1 _\nB2 R _\n_ _ R".to_string(),
-            resolve(maze.detonate(2, 1))
+            resolve(maze.detonate(1, 2))
         );
     }
 
@@ -174,7 +174,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ B1 _\nB2 R _\nB4 B3 R");
         assert_eq!(
             "_ B1 _\n_ R _\n_ _ R".to_string(),
-            resolve(maze.detonate(2, 0))
+            resolve(maze.detonate(0, 2))
         );
     }
 
@@ -185,7 +185,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ B1 _\nB2 R _\n_ B3 W");
         assert_eq!(
             "_ B1 _\nB2 R _\n_ _ W".to_string(),
-            resolve(maze.detonate(2, 1))
+            resolve(maze.detonate(1, 2))
         );
     }
 
@@ -196,7 +196,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ _ _\nB2 F1 _\n_ _ _");
         assert_eq!(
             "_ _ _\n_ _ _\n_ _ _".to_string(),
-            resolve(maze.detonate(1, 0))
+            resolve(maze.detonate(0, 1))
         );
     }
 
@@ -205,7 +205,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ _ _\nB2 F3 _\n_ _ _");
         assert_eq!(
             "_ _ _\n_ F2 _\n_ _ _".to_string(),
-            resolve(maze.detonate(1, 0))
+            resolve(maze.detonate(0, 1))
         );
     }
 
@@ -214,7 +214,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ B1 _\nB2 F3 B1\n_ _ _");
         assert_eq!(
             "_ B1 _\n_ F1 _\n_ _ _".to_string(),
-            resolve(maze.detonate(1, 0))
+            resolve(maze.detonate(0, 1))
         );
     }
 
@@ -223,7 +223,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ B1 _\nB2 R F1\n_ _ _");
         assert_eq!(
             "_ B1 _\n_ R F1\n_ _ _".to_string(),
-            resolve(maze.detonate(1, 0))
+            resolve(maze.detonate(0, 1))
         );
     }
 
@@ -232,7 +232,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ B1 _\nB2 W F1\n_ _ _");
         assert_eq!(
             "_ B1 _\n_ W F1\n_ _ _".to_string(),
-            resolve(maze.detonate(1, 0))
+            resolve(maze.detonate(0, 1))
         );
     }
 
@@ -243,16 +243,16 @@ mod tests {
         let mut maze: Maze = Maze::new("_ B2 _\n_ DR F1\n_ _ _");
         assert_eq!(
             "_ _ _\n_ DR _\n_ _ _".to_string(),
-            resolve(maze.detonate(0, 1))
+            resolve(maze.detonate(1, 0))
         );
     }
-    
+
     #[test]
     fn test_29_result_lab() {
         let mut maze: Maze = Maze::new("_ B2 _\n_ DR F1\n_ B1 _");
         assert_eq!(
             "_ _ _\n_ DR _\n_ B1 _".to_string(),
-            resolve(maze.detonate(0, 1))
+            resolve(maze.detonate(1, 0))
         );
     }
 
@@ -261,7 +261,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ _ _\n_ F1 _\nB2 DU _");
         assert_eq!(
             "_ _ _\n_ _ _\n_ DU _".to_string(),
-            resolve(maze.detonate(2, 0))
+            resolve(maze.detonate(0, 2))
         );
     }
 
@@ -318,18 +318,17 @@ mod tests {
             resolve(maze.detonate(0, 0))
         );
     }
-    
+
     #[test]
     fn test_37_result_lab() {
         let mut maze: Maze = Maze::new("_ _ _ _\nDD _ B4 _\nDR F2 _ _\nF2 _ _ _");
         assert_eq!(
             "_ _ _ _\nDD _ _ _\nDR F1 _ _\nF2 _ _ _".to_string(),
-            resolve(maze.detonate(1, 2))
+            resolve(maze.detonate(2, 1))
         );
     }
 
     // INTEGRAL TEST
-
 
     #[test]
     fn test_01_integral_result_lab() {
@@ -345,7 +344,7 @@ mod tests {
         let mut maze: Maze = Maze::new("_ _ B2 _ B1 _ _\n_ W _ W _ W _\n_ _ B2 R F1 _ _\n_ W _ W R W _\n_ _ B4 _ _ _ _\n_ W _ W _ W _\n_ _ _ _ _ _ B1");
         assert_eq!(
             "_ _ _ _ _ _ _\n_ W _ W _ W _\n_ _ _ R F1 _ _\n_ W _ W R W _\n_ _ _ _ _ _ _\n_ W _ W _ W _\n_ _ _ _ _ _ B1".to_string(),
-            resolve(maze.detonate(4, 2))
+            resolve(maze.detonate(2, 4))
         );
     }
 }

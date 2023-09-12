@@ -1,6 +1,6 @@
 use crate::element::element::Element;
-use crate::utils::maker::Maker;
 use crate::types::position::Position;
+use crate::utils::maker::Maker;
 
 pub struct Converter;
 impl Converter {
@@ -19,7 +19,10 @@ impl Converter {
         for (index_row, row) in matrix.iter().enumerate() {
             let mut new_row_matrix = Vec::new();
             for (index_column, element) in row.iter().enumerate() {
-                new_row_matrix.push(Maker::make(element.as_str(), Position::new(index_row, index_column)));
+                new_row_matrix.push(Maker::make(
+                    element.as_str(),
+                    Position::new(index_column, index_row),
+                ));
             }
             new_matrix.push(new_row_matrix);
         }
