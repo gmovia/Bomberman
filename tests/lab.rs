@@ -328,6 +328,45 @@ mod tests {
         );
     }
 
+    // SUPER BOMB, BOMB, WALL, ROCK, PLAYER, DETOUR AND NOTHING
+
+    #[test]
+    fn test_38_result_lab() {
+        let mut maze: Maze = Maze::new("S4 _ R F1");
+        assert_eq!(
+            "_ _ R _".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
+
+    #[test]
+    fn test_39_result_lab() {
+        let mut maze: Maze = Maze::new("S4 B1 R F2");
+        assert_eq!(
+            "_ _ R F1".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
+
+    #[test]
+    fn test_40_result_lab() {
+        let mut maze: Maze = Maze::new("S4 _ W F1");
+        assert_eq!(
+            "_ _ W F1".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
+
+    #[test]
+    fn test_41_result_lab() {
+        let mut maze: Maze = Maze::new("S4 B1 W F2");
+        assert_eq!(
+            "_ _ W F2".to_string(),
+            resolve(maze.detonate(0, 0))
+        );
+    }
+
+
     // INTEGRAL TEST
 
     #[test]
@@ -347,4 +386,13 @@ mod tests {
             resolve(maze.detonate(2, 4))
         );
     }
+
+    //#[test]
+    //fn test_03_integral_result_lab() {
+    //    let mut maze: Maze = Maze::new("_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _");
+    //    assert_eq!(
+    //        "_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _\n_ _ _ _ _ _ _".to_string(),
+    //        resolve(maze.detonate(2, 4))
+    //    );
+    //}
 }

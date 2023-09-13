@@ -3,7 +3,7 @@ use crate::{types::direction::Direction, lab::Maze};
 pub struct Blast;
 
 impl Blast{
-    pub fn expand(x: usize, y: usize, scope: usize, direction: Direction, maze: &mut Maze) {
+    pub fn expand(x: usize, y: usize, scope: usize, direction: Direction, maze: &mut Maze, code: char) {
         let (start, end, a, b, c, d, reverse) = match direction {
             Direction::Up => (if scope > y { 0 } else { y - scope }, y, 1, 0, 0, 1, true),
             Direction::Down => (y, y + scope, 1, 0, 0, 1, false),
@@ -17,6 +17,7 @@ impl Blast{
                     if !maze.maze[y * b + index * d][x * a + index * c].clone().apply(
                         maze,
                         if end - index <= 0 { 0 } else { end - index - 1 },
+                        code
                     ) {
                         break;
                     }
@@ -28,6 +29,7 @@ impl Blast{
                     if !maze.maze[y * b + index * d][x * a + index * c].clone().apply(
                         maze,
                         if end - index <= 0 { 0 } else { end - index - 1 },
+                        code
                     ) {
                         break;
                     }

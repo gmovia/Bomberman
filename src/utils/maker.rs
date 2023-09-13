@@ -5,7 +5,11 @@ use crate::types::position::Position;
 pub struct Maker;
 impl Maker {
     pub fn new_bomb(scope: usize, position: Position) -> Element {
-        Element::Bomb(Bomb::new(scope, position))
+        Element::Bomb(Bomb::new('B', scope, position))
+    }
+
+    pub fn new_super_bomb(scope: usize, position: Position) -> Element{
+        Element::Bomb(Bomb::new('S', scope, position))
     }
 
     pub fn new_empty(position: Position) -> Element {
@@ -35,6 +39,7 @@ impl Maker {
             if let Some(second_char) = code_chars.next() {
                 match (first_char, second_char) {
                     ('B', _) => Self::new_bomb(second_char as usize - 48, position),
+                    ('S', _) => Self::new_super_bomb(second_char as usize - 48, position),
                     ('F', _) => Self::new_player(second_char as usize - 48, position),
                     ('D', _) => Self::new_detour(second_char, position),
                     (_, _) => Self::new_empty(position),

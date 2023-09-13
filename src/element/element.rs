@@ -44,7 +44,7 @@ impl Element {
         }
     }
 
-    pub fn apply(&mut self, maze: &mut Maze, current_scope: usize) -> bool {
+    pub fn apply(&mut self, maze: &mut Maze, current_scope: usize, code: char) -> bool {
         match self {
             Element::Bomb(bomb) => {
                 bomb.detonate(maze);
@@ -58,15 +58,16 @@ impl Element {
             }
             Element::Detour(direction, position) => {
                 match *direction {
-                    'R' => Blast::expand(position.x + 1, position.y, current_scope, Direction::Right, maze),
-                    'L' => Blast::expand(position.x - 1, position.y, current_scope, Direction::Left, maze),
-                    'U' => Blast::expand(position.x, position.y - 1, current_scope, Direction::Up, maze),
-                    'D' => Blast::expand(position.x, position.y + 1, current_scope, Direction::Down, maze),
+                    'R' => Blast::expand(position.x + 1, position.y, current_scope, Direction::Right, maze, code),
+                    'L' => Blast::expand(position.x - 1, position.y, current_scope, Direction::Left, maze, code),
+                    'U' => Blast::expand(position.x, position.y - 1, current_scope, Direction::Up, maze, code),
+                    'D' => Blast::expand(position.x, position.y + 1, current_scope, Direction::Down, maze, code),
                     _ => (),
                 }
                 false
-            }
-            Element::Rock(_) | Element::Wall(_) => false,
+            },
+            Element::Rock(_) => code == 'S',
+            Element::Wall(_) => false,
             _ => true,
         }
     }

@@ -12,9 +12,9 @@ pub struct Bomb {
 }
 
 impl Bomb {
-    pub fn new(scope: usize, position: Position) -> Bomb {
+    pub fn new(code: char, scope: usize, position: Position) -> Bomb {
         Bomb {
-            code: 'B',
+            code: code,
             scope: scope,
             position: position,
         }
@@ -22,10 +22,10 @@ impl Bomb {
 
     pub fn detonate(&self, maze: &mut Maze) {
         let (x, y, scope) = (self.position.x, self.position.y, self.scope);
-        maze.maze[y][x] = Element::Empty(Position::new(self.position.x, self.position.y));
-        Blast::expand(x, y, scope, Direction::Right, maze);
-        Blast::expand(x, y, scope, Direction::Left, maze);
-        Blast::expand(x, y, scope, Direction::Up, maze);
-        Blast::expand(x, y, scope, Direction::Down, maze);
+        maze.maze[y][x] = Element::Empty(Position::new(x, y));
+        Blast::expand(x, y, scope, Direction::Right, maze, self.code);
+        Blast::expand(x, y, scope, Direction::Left, maze, self.code);
+        Blast::expand(x, y, scope, Direction::Up, maze, self.code);
+        Blast::expand(x, y, scope, Direction::Down, maze, self.code);
     }
 }
