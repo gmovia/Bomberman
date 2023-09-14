@@ -1,5 +1,7 @@
+use crate::element::blast::Blast;
 use crate::element::bomb::Bomb;
 use crate::element::element::Element;
+use crate::types::direction::Direction;
 use crate::types::position::Position;
 
 pub struct Maker;
@@ -8,8 +10,12 @@ impl Maker {
         Element::Bomb(Bomb::new('B', scope, position))
     }
 
-    pub fn new_super_bomb(scope: usize, position: Position) -> Element{
+    pub fn new_super_bomb(scope: usize, position: Position) -> Element {
         Element::Bomb(Bomb::new('S', scope, position))
+    }
+
+    pub fn make_blast(position: Position, direction: Direction, scope: usize, code: char) -> Blast {
+        Blast::new(position, direction, scope, code)
     }
 
     pub fn new_empty(position: Position) -> Element {

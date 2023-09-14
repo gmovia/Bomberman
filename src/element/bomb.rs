@@ -1,31 +1,41 @@
-use crate::types::position::Position;
 use crate::element::blast::Blast;
-use crate::types::direction::Direction;
 use crate::element::element::Element;
 use crate::lab::Maze;
+use crate::types::direction::Direction;
+use crate::types::position::Position;
+use crate::utils::maker::Maker;
 
 #[derive(Debug, Clone)]
 pub struct Bomb {
     pub code: char,
     pub scope: usize,
     pub position: Position,
+    pub blasts: Vec<Blast>,
 }
 
 impl Bomb {
     pub fn new(code: char, scope: usize, position: Position) -> Bomb {
+        let blast_right = Maker::make_blast(position.clone(), Direction::Right, scope, code);
+        let blast_left = Maker::make_blast(position.clone(), Direction::Left, scope, code);
+        let blast_up = Maker::make_blast(position.clone(), Direction::Up, scope, code);
+        let blast_down = Maker::make_blast(position.clone(), Direction::Down, scope, code);
+
+        let blasts = vec![blast_right, blast_left, blast_up, blast_down];
+
         Bomb {
-            code: code,
-            scope: scope,
-            position: position,
+            code,
+            scope,
+            position,
+            blasts,
         }
     }
 
-    pub fn detonate(&self, maze: &mut Maze) {
-        let (x, y, scope) = (self.position.x, self.position.y, self.scope);
+    pub fn detonate(&mut self, maze: &mut Maze) {
+        let (x, y) = (self.position.x, self.position.y);
         maze.maze[y][x] = Element::Empty(Position::new(x, y));
-        Blast::expand(x, y, scope, Direction::Right, maze, self.code);
-        Blast::expand(x, y, scope, Direction::Left, maze, self.code);
-        Blast::expand(x, y, scope, Direction::Up, maze, self.code);
-        Blast::expand(x, y, scope, Direction::Down, maze, self.code);
+
+        for blast in &mut self.blasts {
+            blast.desplace(maze);
+        }
     }
 }

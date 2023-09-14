@@ -11,7 +11,7 @@ pub mod utils {
 }
 
 pub mod element {
+    pub mod blast;
     pub mod bomb;
     pub mod element;
-    pub mod blast;
 }

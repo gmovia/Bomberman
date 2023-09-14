@@ -24,7 +24,7 @@ impl Maze {
 
     pub fn detonate(&mut self, x: usize, y: usize) -> Result<String, String> {
         if let Element::Bomb(bomb) = self.maze[y][x].clone() {
-            bomb.detonate(self);
+            bomb.clone().detonate(self);
         } else {
             return Err("ERR".to_string());
         }

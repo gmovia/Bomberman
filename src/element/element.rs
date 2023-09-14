@@ -1,9 +1,8 @@
+use crate::element::blast::Blast;
 use crate::element::bomb::Bomb;
 use crate::lab::Maze;
-use crate::types::direction::Direction;
 use crate::types::position::Position;
 use crate::utils::maker::Maker;
-use crate::element::blast::Blast;
 #[derive(Debug, Clone)]
 
 pub enum Element {
@@ -44,29 +43,31 @@ impl Element {
         }
     }
 
-    pub fn apply(&mut self, maze: &mut Maze, current_scope: usize, code: char) -> bool {
+    pub fn apply(&mut self, maze: &mut Maze, blast: &mut Blast) -> bool {
         match self {
             Element::Bomb(bomb) => {
                 bomb.detonate(maze);
                 true
             }
             Element::Player(lifes, position) => {
-                *lifes -= 1;
+                if *lifes > 0{
+                    *lifes -= 1;
+                }
                 maze.maze[position.y][position.x] =
                     Maker::new_player(*lifes, Position::new(position.x, position.y));
                 true
             }
-            Element::Detour(direction, position) => {
+            Element::Detour(direction, _) => {
                 match *direction {
-                    'R' => Blast::expand(position.x + 1, position.y, current_scope, Direction::Right, maze, code),
-                    'L' => Blast::expand(position.x - 1, position.y, current_scope, Direction::Left, maze, code),
-                    'U' => Blast::expand(position.x, position.y - 1, current_scope, Direction::Up, maze, code),
-                    'D' => Blast::expand(position.x, position.y + 1, current_scope, Direction::Down, maze, code),
+                    'R' => blast.deviate_to_right(maze),
+                    'L' => blast.deviate_to_left(maze),
+                    'U' => blast.deviate_to_up(maze),
+                    'D' => blast.deviate_to_down(maze),
                     _ => (),
                 }
                 false
-            },
-            Element::Rock(_) => code == 'S',
+            }
+            Element::Rock(_) => blast.code == 'S',
             Element::Wall(_) => false,
             _ => true,
         }
