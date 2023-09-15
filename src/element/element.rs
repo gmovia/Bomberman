@@ -1,75 +1,54 @@
 use crate::element::blast::Blast;
 use crate::element::bomb::Bomb;
+use crate::element::detour::Detour;
+use crate::element::empty::Empty;
+use crate::element::player::Player;
+use crate::element::rock::Rock;
+use crate::element::wall::Wall;
 use crate::lab::Maze;
-use crate::types::position::Position;
-use crate::utils::maker::Maker;
+
 #[derive(Debug, Clone)]
 
 pub enum Element {
     Bomb(Bomb),
-    Rock(Position),
-    Wall(Position),
-    Player(usize, Position),
-    Detour(char, Position),
-    Empty(Position),
+    Rock(Rock),
+    Wall(Wall),
+    Player(Player),
+    Detour(Detour),
+    Empty(Empty),
 }
 
 impl Element {
     pub fn typef(&self) -> char {
         match self {
-            Element::Bomb(bomb) => bomb.code,
-            Element::Rock(_) => 'R',
-            Element::Wall(_) => 'W',
-            Element::Player(_, _) => 'F',
-            Element::Detour(_, _) => 'D',
-            Element::Empty(_) => '_',
+            Element::Bomb(bomb) => bomb.typef(),
+            Element::Rock(rock) => rock.typef(),
+            Element::Wall(wall) => wall.typef(),
+            Element::Player(player) => player.typef(),
+            Element::Detour(detour) => detour.typef(),
+            Element::Empty(empty) => empty.typef(),
         }
     }
 
     pub fn code(&self) -> String {
         match self {
-            Element::Bomb(bomb) => format!("{}{}", bomb.code, bomb.scope),
-            Element::Rock(_) => 'R'.to_string(),
-            Element::Wall(_) => 'W'.to_string(),
-            Element::Detour(direction, _) => format!("{}{}", 'D', *direction),
-            Element::Player(lifes, _) => {
-                if *lifes > 0 {
-                    format!("{}{}", 'F', *lifes)
-                } else {
-                    "_".to_string()
-                }
-            }
-            Element::Empty(_) => "_".to_string(),
+            Element::Bomb(bomb) => bomb.code(),
+            Element::Rock(rock) => rock.code(),
+            Element::Wall(wall) => wall.code(),
+            Element::Detour(detour) => detour.code(),
+            Element::Player(player) => player.code(),
+            Element::Empty(empty) => empty.code(),
         }
     }
 
     pub fn apply(&mut self, maze: &mut Maze, blast: &mut Blast) -> bool {
         match self {
-            Element::Bomb(bomb) => {
-                bomb.detonate(maze);
-                true
-            }
-            Element::Player(lifes, position) => {
-                if *lifes > 0{
-                    *lifes -= 1;
-                }
-                maze.maze[position.y][position.x] =
-                    Maker::new_player(*lifes, Position::new(position.x, position.y));
-                true
-            }
-            Element::Detour(direction, _) => {
-                match *direction {
-                    'R' => blast.deviate_to_right(maze),
-                    'L' => blast.deviate_to_left(maze),
-                    'U' => blast.deviate_to_up(maze),
-                    'D' => blast.deviate_to_down(maze),
-                    _ => (),
-                }
-                false
-            }
-            Element::Rock(_) => blast.code == 'S',
-            Element::Wall(_) => false,
-            _ => true,
+            Element::Bomb(bomb) => bomb.be_detonated(maze),
+            Element::Player(player) => player.be_detonated(maze),
+            Element::Detour(detour) => detour.be_detonated(maze, blast),
+            Element::Rock(rock) => rock.be_detonated(blast),
+            Element::Wall(wall) => wall.be_detonated(),
+            Element::Empty(empty) => empty.be_detonated(),
         }
     }
 }

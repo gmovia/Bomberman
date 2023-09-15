@@ -13,5 +13,10 @@ pub mod utils {
 pub mod element {
     pub mod blast;
     pub mod bomb;
+    pub mod detour;
     pub mod element;
+    pub mod empty;
+    pub mod player;
+    pub mod rock;
+    pub mod wall;
 }

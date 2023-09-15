@@ -1,5 +1,4 @@
 use crate::element::blast::Blast;
-use crate::element::element::Element;
 use crate::lab::Maze;
 use crate::types::direction::Direction;
 use crate::types::position::Position;
@@ -32,10 +31,23 @@ impl Bomb {
 
     pub fn detonate(&mut self, maze: &mut Maze) {
         let (x, y) = (self.position.x, self.position.y);
-        maze.maze[y][x] = Element::Empty(Position::new(x, y));
+        maze.maze[y][x] = Maker::new_empty(Position::new(x, y));
 
         for blast in &mut self.blasts {
             blast.desplace(maze);
         }
+    }
+
+    pub fn code(&self) -> String {
+        format!("{}{}", self.code, self.scope)
+    }
+
+    pub fn typef(&self) -> char {
+        self.code
+    }
+
+    pub fn be_detonated(&mut self, maze: &mut Maze) -> bool {
+        self.detonate(maze);
+        true
     }
 }

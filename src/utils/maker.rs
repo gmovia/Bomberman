@@ -1,6 +1,11 @@
 use crate::element::blast::Blast;
 use crate::element::bomb::Bomb;
+use crate::element::detour::Detour;
 use crate::element::element::Element;
+use crate::element::empty::Empty;
+use crate::element::player::Player;
+use crate::element::rock::Rock;
+use crate::element::wall::Wall;
 use crate::types::direction::Direction;
 use crate::types::position::Position;
 
@@ -19,23 +24,23 @@ impl Maker {
     }
 
     pub fn new_empty(position: Position) -> Element {
-        Element::Empty(position)
+        Element::Empty(Empty::new(position))
     }
 
     pub fn new_rock(position: Position) -> Element {
-        Element::Rock(position)
+        Element::Rock(Rock::new(position))
     }
 
     pub fn new_wall(position: Position) -> Element {
-        Element::Wall(position)
+        Element::Wall(Wall::new(position))
     }
 
     pub fn new_player(lifes: usize, position: Position) -> Element {
-        Element::Player(lifes, position)
+        Element::Player(Player::new(lifes, position))
     }
 
     pub fn new_detour(direction: char, position: Position) -> Element {
-        Element::Detour(direction, position)
+        Element::Detour(Detour::new(direction, position))
     }
 
     pub fn make(code: &str, position: Position) -> Element {

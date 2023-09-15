@@ -19,7 +19,7 @@ mod tests {
     #[test]
     fn test_02_converter_matrix_to_string() {
         let string = "_ _\n_ R";
-        let matrix = Converter::string_to_matrix(string);       
+        let matrix = Converter::string_to_matrix(string);
         let new_string = Converter::matrix_to_string(&matrix);
         assert_eq!(string, new_string);
     }
@@ -28,8 +28,14 @@ mod tests {
     fn test_03_matrix_object_to_string() {
         let string = "_ _\n_ _";
         let matrix = vec![
-            vec![Maker::new_empty(Position::new(0, 0)), Maker::new_empty(Position::new(1, 0))],
-            vec![Maker::new_empty(Position::new(0, 1)), Maker::new_empty(Position::new(1, 1))],
+            vec![
+                Maker::new_empty(Position::new(0, 0)),
+                Maker::new_empty(Position::new(1, 0)),
+            ],
+            vec![
+                Maker::new_empty(Position::new(0, 1)),
+                Maker::new_empty(Position::new(1, 1)),
+            ],
         ];
         let result = Converter::matrix_object_to_string(&matrix);
         assert_eq!(string, result)
@@ -39,8 +45,14 @@ mod tests {
     fn test_04_string_to_matrix_object() {
         let string = "_ _\n_ _";
         let matrix = vec![
-            vec![Maker::new_empty(Position::new(0, 0)), Maker::new_empty(Position::new(1, 0))],
-            vec![Maker::new_empty(Position::new(0, 1)), Maker::new_empty(Position::new(1, 1))],
+            vec![
+                Maker::new_empty(Position::new(0, 0)),
+                Maker::new_empty(Position::new(1, 0)),
+            ],
+            vec![
+                Maker::new_empty(Position::new(0, 1)),
+                Maker::new_empty(Position::new(1, 1)),
+            ],
         ];
         let result = Converter::string_to_matrix_object(string);
         assert_eq!(matrix[0][0].code(), result[0][0].code());

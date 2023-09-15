@@ -5,7 +5,7 @@ mod tests {
     use taller1_tp1_bomberman::lab::Maze;
     use taller1_tp1_bomberman::types::direction::Direction;
     use taller1_tp1_bomberman::types::position::Position;
-    
+
     #[test]
     fn test_01_create_blast() {
         let blast = Blast::new(Position::new(0, 0), Direction::Right, 3, 'B');

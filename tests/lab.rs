@@ -357,7 +357,10 @@ mod tests {
     #[test]
     fn test_42_result_lab() {
         let mut maze: Maze = Maze::new("B4 _ _ F2\nB4 _ _ DU");
-        assert_eq!("_ _ _ _\n_ _ _ DU".to_string(), resolve(maze.detonate(0, 1)));
+        assert_eq!(
+            "_ _ _ _\n_ _ _ DU".to_string(),
+            resolve(maze.detonate(0, 1))
+        );
     }
 
     #[test]
