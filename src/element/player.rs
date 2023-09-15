@@ -1,3 +1,4 @@
+use crate::element::blast::Blast;
 use crate::lab::Maze;
 use crate::types::position::Position;
 use crate::utils::maker::Maker;
@@ -29,8 +30,8 @@ impl Player {
         'F'
     }
 
-    pub fn be_detonated(&mut self, maze: &mut Maze) -> bool {
-        if self.lifes > 0 {
+    pub fn be_detonated(&mut self, maze: &mut Maze, blast: &mut Blast) -> bool {
+        if self.lifes > 0 && !blast.attack_the_player(self) {
             self.lifes -= 1;
         }
         maze.maze[self.position.y][self.position.x] =

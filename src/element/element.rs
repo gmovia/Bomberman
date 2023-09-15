@@ -44,7 +44,7 @@ impl Element {
     pub fn apply(&mut self, maze: &mut Maze, blast: &mut Blast) -> bool {
         match self {
             Element::Bomb(bomb) => bomb.be_detonated(maze),
-            Element::Player(player) => player.be_detonated(maze),
+            Element::Player(player) => player.be_detonated(maze, blast),
             Element::Detour(detour) => detour.be_detonated(maze, blast),
             Element::Rock(rock) => rock.be_detonated(blast),
             Element::Wall(wall) => wall.be_detonated(),

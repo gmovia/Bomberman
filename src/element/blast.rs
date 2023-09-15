@@ -1,5 +1,7 @@
 use crate::types::position::Position;
 use crate::{lab::Maze, types::direction::Direction};
+
+use super::player::Player;
 #[derive(Debug, Clone)]
 
 pub struct Blast {
@@ -7,6 +9,7 @@ pub struct Blast {
     pub direction: Direction,
     pub scope: usize,
     pub code: char,
+    pub players_attacked: Vec<Player>,
 }
 
 impl Blast {
@@ -16,7 +19,18 @@ impl Blast {
             direction: direction,
             scope: scope,
             code: code,
+            players_attacked: Vec::new(),
         }
+    }
+
+    pub fn attack_the_player(&mut self, player: &mut Player) -> bool {
+        for player_attacked in &self.players_attacked {
+            if player_attacked.position.equals(player.position.clone()) {
+                return true;
+            }
+        }
+        self.players_attacked.push(player.clone());
+        return false;
     }
 
     fn move_to_position(&mut self, position: Position) -> bool {

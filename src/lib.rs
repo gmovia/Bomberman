@@ -1,5 +1,10 @@
 pub mod lab;
 
+pub mod files {
+    pub mod reader;
+    pub mod writer;
+}
+
 pub mod types {
     pub mod direction;
     pub mod position;
