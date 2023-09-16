@@ -1,3 +1,4 @@
+use crate::constants::constants::{ERR_NOT_BOMB, ERR_POSITION_NOT_INCLUDES};
 use crate::element::element::Element;
 use crate::utils::converter::Converter;
 pub struct Maze {
@@ -24,13 +25,13 @@ impl Maze {
 
     pub fn detonate(&mut self, x: usize, y: usize) -> Result<String, String> {
         if !self.is_in_maze(x, y) {
-            return Err("ERR: The position is not includes in the maze".to_string());
+            return Err(ERR_POSITION_NOT_INCLUDES.to_string());
         }
 
         if let Element::Bomb(bomb) = self.maze[y][x].clone() {
             bomb.clone().detonate(self);
         } else {
-            return Err("ERR: The position does not includes a bomb".to_string());
+            return Err(ERR_NOT_BOMB.to_string());
         }
 
         Ok(Converter::matrix_object_to_string(&self.maze))

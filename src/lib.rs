@@ -1,5 +1,9 @@
 pub mod lab;
 
+pub mod constants {
+    pub mod constants;
+}
+
 pub mod files {
     pub mod reader;
     pub mod writer;
@@ -12,6 +16,7 @@ pub mod types {
 
 pub mod utils {
     pub mod converter;
+    pub mod error;
     pub mod maker;
 }
 
