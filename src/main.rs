@@ -20,7 +20,13 @@ fn main() {
 
     match Reader::read(&path_input, &mut content) {
         Ok(()) => println!("Lectura exitosa"),
-        Err(e) => eprintln!("Error: {}", e),
+        Err(e) => {
+            match Writer::write(&concatenated_path, &format!("Error al leer archivo: {}", e)) {
+                Ok(()) => println!("Error escrito en archivo"),
+                Err(e) => eprintln!("Error al escribir en archivo: {}", e),
+            }
+            return;
+        },
     }
 
     let new_content = content.trim_end_matches('\n');
