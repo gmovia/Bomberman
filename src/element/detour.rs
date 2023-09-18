@@ -15,15 +15,15 @@ impl Detour {
             position: position,
         }
     }
-    // Obtengo el codigo.
+
     pub fn code(&self) -> String {
         format!("{}{}", 'D', self.direction)
     }
-    // Obtengo el tipo.
+
     pub fn typef(&self) -> char {
         'D'
     }
-    // Si es detonada entonces cambia la direccion actual de la rafaga.
+
     pub fn be_detonated(&mut self, maze: &mut Maze, blast: &mut Blast) -> bool {
         match self.direction {
             'R' => blast.deviate_to_right(maze),

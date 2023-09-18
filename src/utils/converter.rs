@@ -1,10 +1,8 @@
 use crate::element::element::Element;
 use crate::types::position::Position;
 use crate::utils::maker::Maker;
-// Representa un convertidor.
 pub struct Converter;
 impl Converter {
-    // Convierte un string en una matriz de string.
     pub fn string_to_matrix(maze: &str) -> Vec<Vec<String>> {
         let mut matrix: Vec<Vec<String>> = Vec::new();
         let rows: Vec<String> = maze.split('\n').map(String::from).collect();
@@ -13,7 +11,7 @@ impl Converter {
         }
         matrix
     }
-    // Convierte un string en una matriz de objetos del mapa.
+
     pub fn string_to_matrix_object(maze: &str) -> Vec<Vec<Element>> {
         let mut new_matrix = Vec::new();
         let matrix = Self::string_to_matrix(maze);
@@ -29,7 +27,7 @@ impl Converter {
         }
         new_matrix
     }
-    // Obtengo una matriz de string en un string.
+
     pub fn matrix_to_string(maze: &Vec<Vec<String>>) -> String {
         let mut string_maze: String = String::new();
         for (index, row) in maze.iter().enumerate() {
@@ -40,7 +38,7 @@ impl Converter {
         }
         string_maze
     }
-    // Obtengo una matriz de elementos en un string.
+
     pub fn matrix_object_to_string(maze: &Vec<Vec<Element>>) -> String {
         let mut string_maze = String::new();
 

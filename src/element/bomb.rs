@@ -5,7 +5,7 @@ use crate::types::position::Position;
 use crate::utils::maker::Maker;
 
 #[derive(Debug, Clone)]
-// Representa una bomba.
+
 pub struct Bomb {
     pub code: char,
     pub scope: usize,
@@ -29,7 +29,7 @@ impl Bomb {
             blasts,
         }
     }
-    // Detono la bomba, desplazando sus rafagas hacia sus respectivas direcciones.
+
     pub fn detonate(&mut self, maze: &mut Maze) {
         let (x, y) = (self.position.x, self.position.y);
         maze.maze[y][x] = Maker::new_empty(Position::new(x, y));
@@ -38,15 +38,15 @@ impl Bomb {
             blast.desplace(maze);
         }
     }
-    // Obtengo el codigo de la bomba.
+
     pub fn code(&self) -> String {
         format!("{}{}", self.code, self.scope)
     }
-    // Obtengo el tipo de la bomba.
+
     pub fn typef(&self) -> char {
         self.code
     }
-    // Si es atacada por otra bomba entonces detona.
+
     pub fn be_detonated(&mut self, maze: &mut Maze) -> bool {
         self.detonate(maze);
         true

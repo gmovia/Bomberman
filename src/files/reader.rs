@@ -1,10 +1,8 @@
 use std::fs;
 use std::io::{self, Read};
-// Representa una entidad que lee.
 pub struct Reader;
 
 impl Reader {
-    // Lee un contenido en un path.
     pub fn read(path: &str, content: &mut String) -> Result<(), io::Error> {
         match fs::File::open(path) {
             Ok(mut file) => {

@@ -1,7 +1,6 @@
 use crate::constants::constants::{ERR_NOT_BOMB, ERR_POSITION_NOT_INCLUDES};
 use crate::element::element::Element;
 use crate::utils::converter::Converter;
-// Representa el mapa del juego.
 pub struct Maze {
     pub maze: Vec<Vec<Element>>,
     limit_x: usize,
@@ -19,11 +18,9 @@ impl Maze {
             limit_y: limit_y,
         }
     }
-    // Se fija si una posicion se encuentra dentro del mapa.
     pub fn is_in_maze(&self, x: usize, y: usize) -> bool {
         x < self.limit_x && y < self.limit_y
     }
-    // Detona una direccion.
     pub fn detonate(&mut self, x: usize, y: usize) -> Result<String, String> {
         if !self.is_in_maze(x, y) {
             return Err(ERR_POSITION_NOT_INCLUDES.to_string());

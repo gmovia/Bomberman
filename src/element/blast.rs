@@ -3,7 +3,6 @@ use crate::{lab::Maze, types::direction::Direction};
 
 use super::player::Player;
 #[derive(Debug, Clone)]
-// Representa una rafaga. Se puede mover en cuatro direcciones: izquierda, derecha, arriba y abajo.
 pub struct Blast {
     pub position: Position,
     pub direction: Direction,
@@ -22,7 +21,7 @@ impl Blast {
             players_attacked: Vec::new(),
         }
     }
-    // Si el jugador no fue atacado por la rafaga entonces puedo atacarlo y disminuir su vida.
+
     pub fn attack_the_player(&mut self, player: &mut Player) -> bool {
         for player_attacked in &self.players_attacked {
             if player_attacked.position.equals(player.position.clone()) {
@@ -32,7 +31,7 @@ impl Blast {
         self.players_attacked.push(player.clone());
         return false;
     }
-    // En el caso de que pueda mover al jugador, devuelvo true y en caso contrario, false.
+
     fn move_to_position(&mut self, position: Position) -> bool {
         if !(self.position.equals(position.clone())) && self.scope > 0 {
             self.scope -= 1;
@@ -41,35 +40,35 @@ impl Blast {
         }
         return false;
     }
-    // Modifico la direccion de la rafaga hacia la derecha.
+
     pub fn deviate_to_right(&mut self, maze: &mut Maze) {
         self.direction = Direction::Right;
         if self.move_to_position(self.position.right()) {
             self.desplace(maze);
         }
     }
-    // Modifico la direccion de la rafaga hacia la izquierda.
+
     pub fn deviate_to_left(&mut self, maze: &mut Maze) {
         self.direction = Direction::Left;
         if self.move_to_position(self.position.left()) {
             self.desplace(maze);
         }
     }
-    // Modifico la direccion de la rafaga hacia arriba.
+
     pub fn deviate_to_up(&mut self, maze: &mut Maze) {
         self.direction = Direction::Up;
         if self.move_to_position(self.position.up()) {
             self.desplace(maze);
         }
     }
-    // Modifico la direccion de la rafaga hacia abajo.
+
     pub fn deviate_to_down(&mut self, maze: &mut Maze) {
         self.direction = Direction::Down;
         if self.move_to_position(self.position.down()) {
             self.desplace(maze);
         }
     }
-    // Desplazo la rafaga y actualizo su posicion.
+
     pub fn desplace(&mut self, maze: &mut Maze) {
         let (start, end, a, b, c, d, reverse) = self.match_direction();
 
@@ -87,7 +86,7 @@ impl Blast {
             }
         }
     }
-    //  Actualizo la posicion de la rafaga y detono la celda actual.
+
     fn match_element_and_apply(
         &mut self,
         maze: &mut Maze,
@@ -111,7 +110,7 @@ impl Blast {
         }
         false
     }
-    // En base a la direccion actual de la rafaga, obtengo los parametros que me permitiran recorrer el mapa.
+
     fn match_direction(&self) -> (usize, usize, usize, usize, usize, usize, bool) {
         match self.direction {
             Direction::Up => (

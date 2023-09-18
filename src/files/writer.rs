@@ -1,10 +1,8 @@
 use std::fs;
 use std::io::{self, Write};
-// Representa una entidad que escribe.
 pub struct Writer;
 
 impl Writer {
-    // Escribe un contenido en un path.
     pub fn write(path: &str, content: &String) -> Result<(), io::Error> {
         match fs::File::create(path) {
             Ok(mut file) => {
