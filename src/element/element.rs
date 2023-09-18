@@ -8,7 +8,7 @@ use crate::element::wall::Wall;
 use crate::lab::Maze;
 
 #[derive(Debug, Clone)]
-
+// Representa un elemento del mapa.
 pub enum Element {
     Bomb(Bomb),
     Rock(Rock),
@@ -19,6 +19,7 @@ pub enum Element {
 }
 
 impl Element {
+    // Obtengo el tipo.
     pub fn typef(&self) -> char {
         match self {
             Element::Bomb(bomb) => bomb.typef(),
@@ -29,7 +30,7 @@ impl Element {
             Element::Empty(empty) => empty.typef(),
         }
     }
-
+    // Obtengo el codigo.
     pub fn code(&self) -> String {
         match self {
             Element::Bomb(bomb) => bomb.code(),
@@ -40,7 +41,7 @@ impl Element {
             Element::Empty(empty) => empty.code(),
         }
     }
-
+    // Detona al elemento actual.
     pub fn apply(&mut self, maze: &mut Maze, blast: &mut Blast) -> bool {
         match self {
             Element::Bomb(bomb) => bomb.be_detonated(maze),

@@ -8,41 +8,42 @@ use crate::element::rock::Rock;
 use crate::element::wall::Wall;
 use crate::types::direction::Direction;
 use crate::types::position::Position;
-
+// Es un creador de objetos.
 pub struct Maker;
 impl Maker {
+    // Crea una bomba.
     pub fn new_bomb(scope: usize, position: Position) -> Element {
         Element::Bomb(Bomb::new('B', scope, position))
     }
-
+    // Crea una super bomba.
     pub fn new_super_bomb(scope: usize, position: Position) -> Element {
         Element::Bomb(Bomb::new('S', scope, position))
     }
-
+    // Crea una rafaga.
     pub fn make_blast(position: Position, direction: Direction, scope: usize, code: char) -> Blast {
         Blast::new(position, direction, scope, code)
     }
-
+    // Crea un elemento vacio.
     pub fn new_empty(position: Position) -> Element {
         Element::Empty(Empty::new(position))
     }
-
+    // Crea una roca.
     pub fn new_rock(position: Position) -> Element {
         Element::Rock(Rock::new(position))
     }
-
+    // Crea una pared.
     pub fn new_wall(position: Position) -> Element {
         Element::Wall(Wall::new(position))
     }
-
+    // Crea un jugador.
     pub fn new_player(lifes: usize, position: Position) -> Element {
         Element::Player(Player::new(lifes, position))
     }
-
+    // Crea un desvio.
     pub fn new_detour(direction: char, position: Position) -> Element {
         Element::Detour(Detour::new(direction, position))
     }
-
+    // Crea un elemento.
     pub fn make(code: &str, position: Position) -> Element {
         let mut code_chars = code.chars();
 
