@@ -24,7 +24,7 @@ mod tests {
     fn test_02_result_lab() {
         let mut maze: Maze = Maze::new("_");
         assert_eq!(
-            "ERR: The position does not includes a bomb".to_string(),
+            "ERROR: The position does not includes a bomb".to_string(),
             resolve(maze.detonate(0, 0))
         );
     }
@@ -438,7 +438,7 @@ mod tests {
     fn test_05_integral_result_lab() {
         let mut maze: Maze = Maze::new("_ _ _ _ _ _ _\n_ W _ W _ W _\nB4 _ _ _ F2 _ _\n_ W _ W _ W _\nB2 _ B5 _ DU _ _\n_ W _ W _ W _\n_ _ _ _ _ _ _");
         assert_eq!(
-            "ERR: The position is not includes in the maze".to_string(),
+            "ERROR: The position is not includes in the maze".to_string(),
             resolve(maze.detonate(9, 9))
         );
     }

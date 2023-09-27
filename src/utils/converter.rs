@@ -1,4 +1,4 @@
-use crate::element::element::Element;
+use crate::elements::element::Element;
 use crate::types::position::Position;
 use crate::utils::maker::Maker;
 pub struct Converter;
@@ -33,7 +33,7 @@ impl Converter {
         for (index, row) in maze.iter().enumerate() {
             string_maze.push_str(&row.join(" "));
             if index != maze.len() - 1 {
-                string_maze.push_str("\n");
+                string_maze.push('\n');
             }
         }
         string_maze

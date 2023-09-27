@@ -1,4 +1,4 @@
-use crate::element::blast::Blast;
+use crate::elements::blast::Blast;
 use crate::lab::Maze;
 use crate::types::position::Position;
 use crate::utils::maker::Maker;
@@ -12,8 +12,8 @@ pub struct Player {
 impl Player {
     pub fn new(lifes: usize, position: Position) -> Player {
         Player {
-            lifes: lifes,
-            position: position,
+            lifes,
+            position,
         }
     }
 

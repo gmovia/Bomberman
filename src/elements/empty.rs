@@ -6,7 +6,7 @@ pub struct Empty {
 
 impl Empty {
     pub fn new(position: Position) -> Empty {
-        Empty { position: position }
+        Empty { position }
     }
     pub fn code(&self) -> String {
         '_'.to_string()

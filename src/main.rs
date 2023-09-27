@@ -1,5 +1,5 @@
 use std::env;
-use taller1_tp1_bomberman::constants::constants::{
+use taller1_tp1_bomberman::constants::consts::{
     ERR_ARGS, ERR_INVALID_X, ERR_INVALID_Y, ERR_READ,
 };
 use taller1_tp1_bomberman::files::reader::Reader;
@@ -36,7 +36,7 @@ fn main() {
         }
     };
 
-    match Reader::read(&path_input, &mut content) {
+    match Reader::read(path_input, &mut content) {
         Ok(()) => println!("Lectura exitosa"),
         Err(_) => {
             error(ERR_READ, &concatenated_path);

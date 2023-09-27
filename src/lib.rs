@@ -1,7 +1,7 @@
 pub mod lab;
 
 pub mod constants {
-    pub mod constants;
+    pub mod consts;
 }
 
 pub mod files {
@@ -20,7 +20,7 @@ pub mod utils {
     pub mod maker;
 }
 
-pub mod element {
+pub mod elements {
     pub mod blast;
     pub mod bomb;
     pub mod detour;

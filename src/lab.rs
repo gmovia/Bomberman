@@ -1,5 +1,5 @@
-use crate::constants::constants::{ERR_NOT_BOMB, ERR_POSITION_NOT_INCLUDES};
-use crate::element::element::Element;
+use crate::constants::consts::{ERR_NOT_BOMB, ERR_POSITION_NOT_INCLUDES};
+use crate::elements::element::Element;
 use crate::utils::converter::Converter;
 pub struct Maze {
     pub maze: Vec<Vec<Element>>,
@@ -14,8 +14,8 @@ impl Maze {
         let limit_x: usize = matrix[0].len();
         Maze {
             maze: matrix,
-            limit_x: limit_x,
-            limit_y: limit_y,
+            limit_x,
+            limit_y,
         }
     }
     pub fn is_in_maze(&self, x: usize, y: usize) -> bool {

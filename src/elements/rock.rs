@@ -1,4 +1,4 @@
-use crate::element::blast::Blast;
+use crate::elements::blast::Blast;
 use crate::types::position::Position;
 #[derive(Debug, Clone)]
 pub struct Rock {
@@ -7,7 +7,7 @@ pub struct Rock {
 
 impl Rock {
     pub fn new(position: Position) -> Rock {
-        Rock { position: position }
+        Rock { position }
     }
 
     pub fn code(&self) -> String {

@@ -6,7 +6,7 @@ pub struct Wall {
 
 impl Wall {
     pub fn new(position: Position) -> Wall {
-        Wall { position: position }
+        Wall { position }
     }
 
     pub fn code(&self) -> String {

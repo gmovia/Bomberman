@@ -1,4 +1,4 @@
-use crate::element::blast::Blast;
+use crate::elements::blast::Blast;
 use crate::lab::Maze;
 use crate::types::position::Position;
 #[derive(Debug, Clone)]
@@ -11,8 +11,8 @@ pub struct Detour {
 impl Detour {
     pub fn new(direction: char, position: Position) -> Detour {
         Detour {
-            direction: direction,
-            position: position,
+            direction,
+            position,
         }
     }
 

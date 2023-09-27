@@ -1,4 +1,4 @@
-use crate::element::blast::Blast;
+use crate::elements::blast::Blast;
 use crate::lab::Maze;
 use crate::types::direction::Direction;
 use crate::types::position::Position;

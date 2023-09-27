@@ -1,4 +1,4 @@
-use taller1_tp1_bomberman::element::element::Element;
+use taller1_tp1_bomberman::elements::element::Element;
 #[cfg(test)]
 use taller1_tp1_bomberman::utils::maker::Maker;
 

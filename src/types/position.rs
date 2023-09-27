@@ -6,7 +6,7 @@ pub struct Position {
 
 impl Position {
     pub fn new(x: usize, y: usize) -> Position {
-        Position { x: x, y: y }
+        Position { x, y }
     }
 
     pub fn equals(&self, position: Position) -> bool {

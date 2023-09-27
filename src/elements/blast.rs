@@ -14,10 +14,10 @@ pub struct Blast {
 impl Blast {
     pub fn new(position: Position, direction: Direction, scope: usize, code: char) -> Blast {
         Blast {
-            position: position,
-            direction: direction,
-            scope: scope,
-            code: code,
+            position,
+            direction,
+            scope,
+            code,
             players_attacked: Vec::new(),
         }
     }
@@ -29,7 +29,7 @@ impl Blast {
             }
         }
         self.players_attacked.push(player.clone());
-        return false;
+        false
     }
 
     fn move_to_position(&mut self, position: Position) -> bool {
@@ -38,7 +38,7 @@ impl Blast {
             self.position = position;
             return true;
         }
-        return false;
+        false
     }
 
     pub fn deviate_to_right(&mut self, maze: &mut Maze) {

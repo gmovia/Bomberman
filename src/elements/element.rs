@@ -1,10 +1,10 @@
-use crate::element::blast::Blast;
-use crate::element::bomb::Bomb;
-use crate::element::detour::Detour;
-use crate::element::empty::Empty;
-use crate::element::player::Player;
-use crate::element::rock::Rock;
-use crate::element::wall::Wall;
+use crate::elements::blast::Blast;
+use crate::elements::bomb::Bomb;
+use crate::elements::detour::Detour;
+use crate::elements::empty::Empty;
+use crate::elements::player::Player;
+use crate::elements::rock::Rock;
+use crate::elements::wall::Wall;
 use crate::lab::Maze;
 
 #[derive(Debug, Clone)]
