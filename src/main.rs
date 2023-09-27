@@ -1,7 +1,5 @@
 use std::env;
-use taller1_tp1_bomberman::constants::consts::{
-    ERR_ARGS, ERR_INVALID_X, ERR_INVALID_Y, ERR_READ,
-};
+use taller1_tp1_bomberman::constants::consts::{ERR_ARGS, ERR_INVALID_X, ERR_INVALID_Y, ERR_READ};
 use taller1_tp1_bomberman::files::reader::Reader;
 use taller1_tp1_bomberman::files::writer::Writer;
 use taller1_tp1_bomberman::lab::Maze;

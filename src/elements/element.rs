@@ -8,6 +8,7 @@ use crate::elements::wall::Wall;
 use crate::lab::Maze;
 
 #[derive(Debug, Clone)]
+/// Representa un elemento del mapa.
 pub enum Element {
     Bomb(Bomb),
     Rock(Rock),
@@ -18,6 +19,8 @@ pub enum Element {
 }
 
 impl Element {
+    /// Devuelve el tipo del elemento.
+    /// Ejemplo. Si es una bomba devuelve 'B' y si es un jugador devuelve 'F'.
     pub fn typef(&self) -> char {
         match self {
             Element::Bomb(bomb) => bomb.typef(),
@@ -28,7 +31,8 @@ impl Element {
             Element::Empty(empty) => empty.typef(),
         }
     }
-
+    /// Devuelve el codigo del elemento.
+    /// Ejemplo. Si es una bomba con alcance 1 devuelve 'B1' y si es una pared devuelve 'W'.
     pub fn code(&self) -> String {
         match self {
             Element::Bomb(bomb) => bomb.code(),
@@ -39,7 +43,8 @@ impl Element {
             Element::Empty(empty) => empty.code(),
         }
     }
-
+    /// Recibe un mapa y una rafaga. Trata de detonar el elemento y devuelve un booleano si esto fue posible.
+    /// Ejemplo. Si es una bomba devuelve true y si es una pared devuelve false.
     pub fn apply(&mut self, maze: &mut Maze, blast: &mut Blast) -> bool {
         match self {
             Element::Bomb(bomb) => bomb.be_detonated(maze),
